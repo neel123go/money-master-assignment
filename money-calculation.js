@@ -14,6 +14,7 @@ function getInputValue(id) {
         return inputValue;
     }
 }
+
 // function for calculating balance and expenses
 function calculate() {
     const incomeInputValue = parseFloat(getInputValue('income'));
@@ -33,3 +34,20 @@ function calculate() {
         }
     }
 }
+
+// function for calculate saving money
+document.getElementById('save-btn').addEventListener('click', function () {
+    const saveMoneyPercentageValue = parseFloat(getInputValue('money-save'));
+    if (!isNaN(saveMoneyPercentageValue)) {
+        const incomeInputValue = parseFloat(getInputValue('income'));
+        const savingAmount = (saveMoneyPercentageValue * incomeInputValue) / 100;
+        const balance = parseFloat(calculate());
+        if (savingAmount < balance) {
+            document.getElementById('saving-amount').innerText = savingAmount.toFixed(2);
+            const remainingBalance = balance - savingAmount;
+            document.getElementById('remaining-balance').innerText = remainingBalance.toFixed(2);
+        } else {
+            errorTextField.innerText = "You don't have enough money to save " + saveMoneyPercentageValue + "% of your income.";
+        }
+    }
+})
