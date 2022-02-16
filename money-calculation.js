@@ -1,11 +1,11 @@
 const errorTextField = document.getElementById('error-msg');
 
-// function for get input value
+// function for getting input value
 function getInputValue(id) {
     const inputField = document.getElementById(id + '-input-field');
     if (inputField.value == "") {
         errorTextField.innerText = 'Field must not be empty';
-    } else if (isNaN(inputField.value)) {
+    } else if (isNaN(inputField.value) === true) {
         errorTextField.innerText = 'Please, Enter numeric value';
     } else if (inputField.value < 0) {
         errorTextField.innerText = 'Please, Enter any positive numeric value';
@@ -15,14 +15,15 @@ function getInputValue(id) {
     }
 }
 
-// function for calculating balance and expenses
+// function for calculating total expenses & balance
 function calculate() {
     const incomeInputValue = parseFloat(getInputValue('income'));
     const foodInputValue = parseFloat(getInputValue('food'));
     const rentInputValue = parseFloat(getInputValue('rent'));
     const clothesInputValue = parseFloat(getInputValue('clothes'));
     const totalExpenses = foodInputValue + rentInputValue + clothesInputValue;
-    if (!isNaN(totalExpenses)) {
+
+    if (incomeInputValue > 0 && totalExpenses > 0) {
         if (incomeInputValue >= totalExpenses) {
             const balance = incomeInputValue - totalExpenses;
             document.getElementById('total-expenses').innerText = totalExpenses;
@@ -35,7 +36,7 @@ function calculate() {
     }
 }
 
-// function for calculate saving money
+// function for calculating saving money
 document.getElementById('save-btn').addEventListener('click', function () {
     const saveMoneyPercentageValue = parseFloat(getInputValue('money-save'));
     if (!isNaN(saveMoneyPercentageValue)) {
