@@ -4,3 +4,12 @@
 .right-part{
     height: 100vh;
 }
+
+@media screen and (max-width: 991px){
+    .right-part{
+        height: auto;
+    }
+    .left-part{
+        height: auto;
+    }
+}
